@@ -1,0 +1,11 @@
+// Deploy these rules only after you add Firebase Authentication to the app.
+// Until then, use Firestore test mode briefly while setting the portal up,
+// and never publish a site with open rules and real customer/payment data.
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
